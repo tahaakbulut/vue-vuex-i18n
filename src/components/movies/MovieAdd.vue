@@ -1,6 +1,6 @@
 <template>
   <div class="card my-5 p-3">
-    <form class="car-body">
+    <form class="car-body" @submit.prevent="saveMovie">
       <div class="form-group">
         <label for="movieName">Name</label>
         <input
@@ -62,7 +62,7 @@
           required
         />
       </div>
-      <button class="btn btn-primary" @click.prevent="saveMovie">Add</button>
+      <button class="btn btn-primary" type="submit">Add</button>
     </form>
   </div>
 </template>
