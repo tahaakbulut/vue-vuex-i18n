@@ -19,6 +19,10 @@ const mutations = {
     },
     changeStar(state, data) {
         state.movies.find(item => item.id == data.id).star = data.star
+    },
+    sortMovie(state, params) {
+        const shortMovie = state.movies.sort((a, b) => params == "down" ? a.star - b.star : b.star - a.star)
+        state.map = shortMovie
     }
 }
 
@@ -55,6 +59,9 @@ const actions = { // async işlemleri yapmamızı sağlıyor.
             .then(() => {
                 commit('removeMovie', payload);
             })
+    },
+    sortMovie({ commit }, params) {
+        commit('sortMovie', params);
     }
 }
 

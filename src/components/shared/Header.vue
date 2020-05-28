@@ -11,9 +11,15 @@
         <div class="btn btn-info">
           <i class="fa fa-filter mr-1"></i>Filter
         </div>
-        <button class="btn btn-info mx-2">
-          <i class="fa fa-sort mr-1"></i> Sort
-        </button>
+        <div class="dropdown">
+          <button class="btn btn-info mx-2" @click="isMenu = !isMenu">
+            <i class="fa fa-sort mr-1"></i> Sort
+          </button>
+          <div class="dropdown-menu show" v-if="isMenu">
+            <a class="dropdown-item" @click="sortMovie('up')">Lowest First</a>
+            <a class="dropdown-item" @click="sortMovie('down')">Highest First</a>
+          </div>
+        </div>
       </template>
       <button
         class="btn btn-info mr-2"
@@ -36,8 +42,14 @@
 export default {
   data() {
     return {
-      currenPath: window.location.pathname
+      currenPath: window.location.pathname,
+      isMenu: false
     };
+  },
+  methods: {
+    sortMovie(param) {
+      this.$store.dispatch("sortMovie", param);
+    }
   },
   watch: {
     $route(from) {
