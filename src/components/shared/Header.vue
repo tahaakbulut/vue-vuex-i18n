@@ -16,8 +16,8 @@
             <i class="fa fa-sort mr-1"></i> Sort
           </button>
           <div class="dropdown-menu show" v-if="isMenu">
-            <a class="dropdown-item" @click="sortMovie('up')">Lowest First</a>
-            <a class="dropdown-item" @click="sortMovie('down')">Highest First</a>
+            <a class="dropdown-item" @click="sortMovie()">Highest First</a>
+            <a class="dropdown-item" @click="sortMovie('down')">Lowest First</a>
           </div>
         </div>
       </template>
