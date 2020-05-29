@@ -2,11 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 const state = {
-    movies: []
+    movies: [],
+    filter: 'all'
 }
 const getters = { // state içindeki bilgileri istediğimiz page içine çekmemizi sağlıyor.
     getMovieList(state) {
         return state.movies
+    },
+    getFilter(state) {
+        return state.filter
     }
 }
 const mutations = {
@@ -23,6 +27,9 @@ const mutations = {
     sortMovie(state, params) {
         const shortMovie = state.movies.sort((a, b) => params == "down" ? a.star - b.star : b.star - a.star)
         state.map = shortMovie
+    },
+    filterMovies(state, params) {
+        state.filter = params
     }
 }
 
@@ -62,6 +69,9 @@ const actions = { // async işlemleri yapmamızı sağlıyor.
     },
     sortMovie({ commit }, params) {
         commit('sortMovie', params);
+    },
+    filterMovies({ commit }, payload) {
+        commit('filterMovies', payload);
     }
 }
 

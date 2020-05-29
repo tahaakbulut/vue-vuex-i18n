@@ -8,16 +8,23 @@
         </router-link>
       </ul>
       <template v-if="currenPath == '/'">
-        <div class="btn btn-info">
-          <i class="fa fa-filter mr-1"></i>Filter
+        <div class="dropdown">
+          <div class="btn btn-info" @click="isFilterMenu = !isFilterMenu">
+            <i class="fa fa-filter mr-1"></i>Filter
+          </div>
+          <div class="dropdown-menu show" v-if="isFilterMenu">
+            <button class="btn dropdown-item" @click="filterMovies('series')">Series</button>
+            <button class="btn dropdown-item" @click="filterMovies('movie')">Movies</button>
+            <button class="btn dropdown-item" @click="filterMovies('all')">All</button>
+          </div>
         </div>
         <div class="dropdown">
           <button class="btn btn-info mx-2" @click="isMenu = !isMenu">
             <i class="fa fa-sort mr-1"></i> Sort
           </button>
           <div class="dropdown-menu show" v-if="isMenu">
-            <a class="dropdown-item" @click="sortMovie()">Highest First</a>
-            <a class="dropdown-item" @click="sortMovie('down')">Lowest First</a>
+            <button class="btn dropdown-item" @click="sortMovie()">Highest First</button>
+            <button class="btn dropdown-item" @click="sortMovie('down')">Lowest First</button>
           </div>
         </div>
       </template>
@@ -43,12 +50,16 @@ export default {
   data() {
     return {
       currenPath: window.location.pathname,
-      isMenu: false
+      isMenu: false,
+      isFilterMenu: false
     };
   },
   methods: {
     sortMovie(param) {
       this.$store.dispatch("sortMovie", param);
+    },
+    filterMovies(param) {
+      this.$store.dispatch("filterMovies", param);
     }
   },
   watch: {
@@ -59,9 +70,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 header {
   width: 100%;
-  background-color: red;
 }
 </style>
